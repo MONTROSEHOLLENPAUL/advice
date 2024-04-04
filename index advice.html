@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advice</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: rgba(148, 148, 219, 0.82);
+        height: 100vh;
+      }
+      .restart {
+        font-size: 2rem;
+        cursor: pointer;
+        text-align: center;
+        margin: 4px;
+        display: block;
+      }
+      .restart:hover {
+        color: white;
+      }
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 3px 6px 20px 7px;
+        background: linear-gradient(45deg, black, transparent);
+        border-radius: 5px;
+      }
+      .advice {
+        text-align: center;
+        padding: 10px;
+        font-size: 1.8rem;
+        text-shadow: #fc0 1px 0 10px;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span class="restart">↺</span>
+      <div class="advice"></div>
+    </div>
+  </body>
+  <script>
+    const advice = "https://api.adviceslip.com/advice";
+    fetch(advice)
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log(data)
+        const adv = document.querySelector(".advice");
+        let adviceElement = document.createElement("p");
+        adviceElement.innerHTML = `❝  ${data.slip.advice}  ❞`;
+        adv.appendChild(adviceElement);
+      });
+      document.querySelector(".restart").addEventListener("click", function () {
+        window.location.reload()
+      })
+    </script>
+</html>
